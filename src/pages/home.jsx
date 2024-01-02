@@ -8,7 +8,7 @@ const Home = () => {
     // 
     const [allCountries, setAllCountries] = useState(null)
     useEffect( () => {
-        fetch('https://restcountries.com/v3.1/all')
+        fetch('https://restcountries.com/v3.1/all?fields=name,capital,flags,population,region')
         .then( response => response.json())
         .then(data => {
             setAllCountries(data)
@@ -32,64 +32,84 @@ const Home = () => {
     // 
     const selectedRegion = (event) => {
         const region = event.target.dataset.name
-        fetch(`https://restcountries.com/v3.1/region/${region}`)
+        const url = region === 'All' ? "https://restcountries.com/v3.1/all?fields=name,capital,flags,population,region": `https://restcountries.com/v3.1/region/${region}?fields=name,capital,flags,population,region`
+        fetch(url)
         .then( response => response.json())
-        .then(data => {
-            setAllCountries(data)
+        .then(data => setAllCountries(data))
+        .finally( () => {
+            regionRef.current.classList.add('hidden')
+            setDisplayRegions(false)
         })
-
-        regionRef.current.classList.add('hidden')
-        setDisplayRegions(false)
     }
 
-    // 
+    //
+    const inputRef = useRef(null)
+    inputRef.current?.addEventListener('keyup', () => {
+        const countryName = inputRef.current.value
+        fetch(`https://restcountries.com/v3.1/all?fields=name,capital,flags,population,region`)
+        .then( response => response.json())
+        .then(data => {
+            setAllCountries(data.filter(country => country.name.common.toLowerCase().includes(countryName.toLowerCase())))
+        })
+
+    })
+
+
+
 
     return (
-        <div className=" bg-light-Background dark:bg-dark-Background text-light-Text dark:text-neutral min-h-screen">
+        <div className="min-h-screen bg-light-Background dark:bg-dark-Background text-light-Text dark:text-neutral">
             <>
                 <Navbar />
             </>
-            <section className=" px-14 py-10">
+            <section className="py-10 pt-16 px-14">
                 <header className="grid grid-cols-6">
 
-                    <div className=" col-span-2 flex items-center gap-4 evenShadow rounded-md py-4 px-4">
+                    <div className="flex items-center col-span-2 gap-4 px-4 rounded-md evenShadow h-14">
                         <label htmlFor="countrySearch">
                             <img src={searchImg} alt="search icon" />
                         </label>
-                        <form className=" w-full bg-red-950">
-                            <input className=" outline-none bg-light-Background dark:bg-dark-Background w-full" id="countrySearch" type="text" placeholder="Search for country..." />
+                        <form className="w-full h-full">
+                            <input ref={inputRef} className="w-full h-full rounded-md outline-none bg-light-Background dark:bg-dark-Background" id="countrySearch" type="text" placeholder="Search for country..." />
                         </form>
                     </div>
                     
-                    <div className=" col-start-6 col-span-1 z-50">
-                        <div onClick={toggleDisplayRegions} className=" cursor-pointer rounded-md evenShadow px-5 py-4 flex justify-between">
+                    <div className="col-span-1 col-start-6 ">
+                        <div onClick={toggleDisplayRegions} className="flex justify-between px-4 py-4 rounded-md cursor-pointer evenShadow">
                             <p>Filter by Region</p>
                             <img src={arrow} alt="" />
                         </div>
-                        <div ref={regionRef} className=" rounded-md relative mt-3 z-40 hidden">
-                            <ul className="evenShadow absolute top-0 left-0 w-full rounded-md z-40">
-                                <li onClick={ (e) => selectedRegion(e)} className=" pl-6 py-1 cursor-pointer" data-name="Africa">Africa</li>
-                                <li onClick={ (e) => selectedRegion(e)} className=" pl-6 py-1 cursor-pointer" data-name="America">America</li>
-                                <li onClick={ (e) => selectedRegion(e)} className=" pl-6 py-1 cursor-pointer" data-name="Asia">Asia</li>
-                                <li onClick={ (e) => selectedRegion(e)} className=" pl-6 py-1 cursor-pointer" data-name="Europe">Europe</li>
-                                <li onClick={ (e) => selectedRegion(e)} className=" pl-6 py-1 cursor-pointer" data-name="Oceania">Oceania</li>
+                        <div ref={regionRef} className="relative hidden mt-3 rounded-md ">
+                            <ul className="absolute top-0 left-0 z-50 w-full rounded-md bg-light-Background evenShadow">
+                                <li onClick={ (e) => selectedRegion(e)} className="py-1 pl-6 cursor-pointer " data-name="All">All</li>
+                                <li onClick={ (e) => selectedRegion(e)} className="py-1 pl-6 cursor-pointer " data-name="Africa">Africa</li>
+                                <li onClick={ (e) => selectedRegion(e)} className="py-1 pl-6 cursor-pointer " data-name="America">America</li>
+                                <li onClick={ (e) => selectedRegion(e)} className="py-1 pl-6 cursor-pointer " data-name="Asia">Asia</li>
+                                <li onClick={ (e) => selectedRegion(e)} className="py-1 pl-6 cursor-pointer " data-name="Europe">Europe</li>
+                                <li onClick={ (e) => selectedRegion(e)} className="py-1 pl-6 cursor-pointer " data-name="Oceania">Oceania</li>
                             </ul>
                         </div>
                     </div>
                     
                 </header>
                 {/*  */}
-                <main className="grid grid-cols-4 mt-10 gap-5 z-0">
+                <div className="relative grid grid-cols-4 mt-10 gap-14">
                     {allCountries?.map( (country) => (
-                    <div>
-                        <img src={country.flags.png} alt="" />
-                        <h2>{country.name.common}</h2>
-                        <p>Population:{country.population}</p>
-                        <p>Region: {country.region}</p>
-                        <p>Capital: {country.capital}</p>
+                    <div className="rounded-md evenShadow card">  
+                        <div className="w-full rounded-md countryFlag h-36">
+                            <img src={country.flags.png} className="w-full h-full rounded-t-md" alt="" />
+                        </div>
+                        <div className="countryInfo w-[85%] mx-auto pt-4 pb-10">
+                            <h2 className="font-bold ">{country.name.common}</h2>
+                            <section className="pt-2">
+                                <p className="mb-1 font-medium ">Population: <span className="font-normal text-light-Input ">{country.population}</span></p>
+                                <p className="mb-1 font-medium ">Region: <span className="font-normal text-light-Input ">{country.region}</span></p>
+                                <p className="mb-1 font-medium ">Capital: <span className="font-normal text-light-Input ">{country.capital}</span></p>
+                            </section>
+                        </div>
                     </div>
                 ))}
-                </main>
+                </div>
             </section>
         </div>
     )
