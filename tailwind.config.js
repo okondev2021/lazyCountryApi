@@ -13,8 +13,10 @@ module.exports = {
         "Background": "hsl(0, 0%, 98%)"
        },
        "dark":{
-
-       }
+        "Elements":"hsl(209, 23%, 22%)",
+        "Background": "hsl(207, 26%, 17%)",
+       },
+       "neutral":"hsl(0, 0%, 100%)"
       }
     },
   },
