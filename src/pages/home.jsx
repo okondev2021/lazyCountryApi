@@ -3,6 +3,7 @@ import { useEffect, useState} from "react"
 import searchImg from '../assets/search.svg'
 import arrow from '../assets/caret-down-fill.svg'
 import { useRef } from "react"
+import { Link } from "react-router-dom"
 const Home = () => {
 
     // 
@@ -95,20 +96,22 @@ const Home = () => {
                 {/*  */}
                 <div className="relative grid grid-cols-4 mt-10 gap-14">
                     {allCountries?.map( (country) => (
-                    <div className="rounded-md evenShadow card">  
-                        <div className="w-full rounded-md countryFlag h-36">
-                            <img src={country.flags.png} className="w-full h-full rounded-t-md" alt="" />
-                        </div>
-                        <div className="countryInfo w-[85%] mx-auto pt-4 pb-10">
-                            <h2 className="font-bold ">{country.name.common}</h2>
-                            <section className="pt-2">
-                                <p className="mb-1 font-medium ">Population: <span className="font-normal text-light-Input ">{country.population}</span></p>
-                                <p className="mb-1 font-medium ">Region: <span className="font-normal text-light-Input ">{country.region}</span></p>
-                                <p className="mb-1 font-medium ">Capital: <span className="font-normal text-light-Input ">{country.capital}</span></p>
-                            </section>
-                        </div>
-                    </div>
-                ))}
+                        <Link to={`/about/${country.name.common}`}>
+                            <div key={country.capital} className="rounded-md evenShadow card">  
+                                <div className="w-full rounded-md countryFlag h-36">
+                                    <img src={country.flags.png} className="w-full h-full rounded-t-md" alt="" />
+                                </div>
+                                <div className="countryInfo w-[85%] mx-auto pt-4 pb-10">
+                                    <h2 className="font-bold ">{country.name.official}</h2>
+                                    <section className="pt-4">
+                                        <p className="mb-1 font-medium ">Population: <span className="font-normal text-light-Input ">{country.population}</span></p>
+                                        <p className="mb-1 font-medium ">Region: <span className="font-normal text-light-Input ">{country.region}</span></p>
+                                        <p className="mb-1 font-medium ">Capital: <span className="font-normal text-light-Input ">{country.capital}</span></p>
+                                    </section>
+                                </div>
+                            </div>
+                        </Link>
+                    ))}
                 </div>
             </section>
         </div>
