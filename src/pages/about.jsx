@@ -77,9 +77,9 @@ const About = () => {
                                     <div>
                                         <h1 className="font-medium">Border Countries: </h1>
                                     </div>
-                                    <div className="grid grid-cols-3 ml-1 gap-x-3 gap-y-3">
+                                    <div className="grid grid-cols-4 ml-1 gap-x-3 gap-y-3">
                                         {country.borders.map( (border) => (
-                                            <div key={border} className="flex items-center justify-center px-4 py-2 ml-1 border rounded-md cursor-pointer border-1 border-light-Input">
+                                            <div key={border} className="flex items-center justify-center px-2 py-2 ml-1 text-xs border border-2 rounded-md cursor-pointer border-light-Input">
                                                 <Link to={`/about/${test(border)}`}>{test(border)}</Link>
                                             </div>
                                         ))}
