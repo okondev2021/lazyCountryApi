@@ -9,14 +9,13 @@ const About = () => {
     const {slug} = useParams()
     const [countryDetails, setCountryDetail] = useState(null)
     useEffect( () => {
-        fetch(`https://restcountries.com/v3.1/name/${slug}?fields=name,currencies,languages,tld,capital,population,region,subregion,flags,borders,altSpellings`)
+        fetch(`https://restcountries.com/v3.1/name/${slug}?fullText=true?fields=name,currencies,languages,tld,capital,population,region,subregion,flags,borders,altSpellings`)
         .then( response => response.json())
         .then(data => {setCountryDetail(data)})
     },[slug])
-    
+    console.log(countryDetails)
     // 
     const navigate = useNavigate()
-    
     // 
     const [allCountries, setAllCountries] = useState(null)
     useEffect( () => {
@@ -26,7 +25,7 @@ const About = () => {
             setAllCountries(data)
         })
     }, [])
-    
+    // 
     const test = (val) => {
         const allCountriesInfo = allCountries
         const matchingCountry = allCountriesInfo?.find(country => country.cca3 === val);
@@ -50,19 +49,23 @@ const About = () => {
                 </header>
                 <main className="mt-10 ">
                     {countryDetails?.map( (country) => (
-                        <div key={country.name.common} className="grid grid-cols-2">
-                            <div className="col-span-1 ">
-                                <img src={country.flags.png} alt="" />
+                        <div key={country.name.common} className="grid grid-cols-5">
+                            <div className="col-span-3">
+                                <img className="w-full h-full" src={country.flags.png} alt="" />
                             </div>
-                            
-                            <div>
-                                <div className="col-span-1 ">
-                                    {country.borders.map( (border) => (
-                                        <div key={border}>
-                                            <Link to={`/about/${test(border)}`}>{test(border)}</Link>
-                                        </div>
-                                    ))}
-                                </div>
+                            <div className="col-span-2">
+                                <div><h1>{country.name.common}</h1></div>
+                                <section>
+                                    <div>Native Name: <span>{country.name.nativeName[Object.keys(country.name.nativeName)[0]]?.official  }</span></div>
+                                    <div>Population: <span>{country.population}</span></div>
+                                    <div>Region:<span>{country.region}</span></div>
+                                    <div>Sub Region: <span>{country.subregion}</span></div>
+                                    <div>Capital:<span>{country.capital}</span></div>
+                                    <div>Top Level Domain<span>{country.tld}</span></div>
+                                    <div>Currencies:<span>{country.currencies[Object.keys(country.currencies)[0]].name}</span></div>
+                                    <div><span></span></div>
+                                </section>
+                                <div></div>
                             </div>
                         </div>
                     ))}
