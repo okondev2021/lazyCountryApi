@@ -1,0 +1,7 @@
+                            <div className="col-span-1 ">
+                                {country.borders.map( (border) => (
+                                    <div>
+                                      { test(border)}
+                                    </div>
+                                ))}
+                            </div>

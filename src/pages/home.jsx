@@ -9,7 +9,7 @@ const Home = () => {
     // 
     const [allCountries, setAllCountries] = useState(null)
     useEffect( () => {
-        fetch('https://restcountries.com/v3.1/all?fields=name,capital,flags,population,region')
+        fetch('https://restcountries.com/v3.1/all?fields=name,capital,flags,population,region,altSpellings')
         .then( response => response.json())
         .then(data => {
             setAllCountries(data)
@@ -76,11 +76,11 @@ const Home = () => {
                     </div>
                     
                     <div className="col-span-1 col-start-6 ">
-                        <div onClick={toggleDisplayRegions} className="flex justify-between px-4 py-4 rounded-md cursor-pointer evenShadow">
+                        <div onClick={toggleDisplayRegions} className="flex justify-between px-4 py-4 mb-3 rounded-md cursor-pointer evenShadow">
                             <p>Filter by Region</p>
                             <img src={arrow} alt="" />
                         </div>
-                        <div ref={regionRef} className="relative hidden mt-3 rounded-md ">
+                        <div ref={regionRef} className="relative hidden rounded-md ">
                             <ul className="absolute top-0 left-0 z-50 w-full rounded-md bg-light-Background evenShadow">
                                 <li onClick={ (e) => selectedRegion(e)} className="py-1 pl-6 cursor-pointer " data-name="All">All</li>
                                 <li onClick={ (e) => selectedRegion(e)} className="py-1 pl-6 cursor-pointer " data-name="Africa">Africa</li>
@@ -97,12 +97,12 @@ const Home = () => {
                 <div className="relative grid grid-cols-4 mt-10 gap-14">
                     {allCountries?.map( (country) => (
                         <Link to={`/about/${country.name.common}`}>
-                            <div key={country.capital} className="rounded-md evenShadow card">  
+                            <div key={country.capital} className="rounded-md evenShadow card h-80">  
                                 <div className="w-full rounded-md countryFlag h-36">
                                     <img src={country.flags.png} className="w-full h-full rounded-t-md" alt="" />
                                 </div>
                                 <div className="countryInfo w-[85%] mx-auto pt-4 pb-10">
-                                    <h2 className="font-bold ">{country.name.official}</h2>
+                                    <h2 className="font-bold ">{country.name.common}</h2>
                                     <section className="pt-4">
                                         <p className="mb-1 font-medium ">Population: <span className="font-normal text-light-Input ">{country.population}</span></p>
                                         <p className="mb-1 font-medium ">Region: <span className="font-normal text-light-Input ">{country.region}</span></p>
