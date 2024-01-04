@@ -4,7 +4,6 @@ import Navbar from "../components/navbar"
 import leftArrow from '../assets/arrow-left.svg'
 
 const About = () => {
-
     // 
     const {slug} = useParams()
     const [countryDetails, setCountryDetail] = useState(null)
@@ -13,7 +12,6 @@ const About = () => {
         .then( response => response.json())
         .then(data => {setCountryDetail(data)})
     },[slug])
-    console.log(countryDetails)
     // 
     const navigate = useNavigate()
     // 
@@ -49,23 +47,44 @@ const About = () => {
                 </header>
                 <main className="mt-10 ">
                     {countryDetails?.map( (country) => (
-                        <div key={country.name.common} className="grid grid-cols-5">
-                            <div className="col-span-3">
-                                <img className="w-full h-full" src={country.flags.png} alt="" />
+                        <div key={country.name.common} className="flex justify-between gap-20">
+                            <div className=" w-[50%]">
+                                <img className="w-[90%] h-[70%] mx-auto" src={country.flags.png} alt="" />
                             </div>
-                            <div className="col-span-2">
-                                <div><h1>{country.name.common}</h1></div>
-                                <section>
-                                    <div>Native Name: <span>{country.name.nativeName[Object.keys(country.name.nativeName)[0]]?.official  }</span></div>
-                                    <div>Population: <span>{country.population}</span></div>
-                                    <div>Region:<span>{country.region}</span></div>
-                                    <div>Sub Region: <span>{country.subregion}</span></div>
-                                    <div>Capital:<span>{country.capital}</span></div>
-                                    <div>Top Level Domain<span>{country.tld}</span></div>
-                                    <div>Currencies:<span>{country.currencies[Object.keys(country.currencies)[0]].name}</span></div>
-                                    <div><span></span></div>
+                            <div className=" w-[50%]">
+                                <div>
+                                    <h1 className="text-3xl font-bold">{country.name.common}</h1>
+                                </div>
+                                <section className="grid grid-cols-2 mt-8 ">
+                                    <div>
+                                        <div className="mb-3 font-medium ">Native Name: <span className="font-normal text-light-Input">{country.name.nativeName[Object.keys(country.name.nativeName)[0]]?.official  }</span></div>
+                                        <div className="mb-3 font-medium ">Population: <span className="font-normal text-light-Input">{country.population}</span></div>
+                                        <div className="mb-3 font-medium ">Region: <span className="font-normal text-light-Input">{country.region}</span></div>
+                                        <div className="mb-3 font-medium ">Sub Region: <span className="font-normal text-light-Input">{country.subregion}</span></div>
+                                        <div className="mb-3 font-medium ">Capital: <span className="font-normal text-light-Input">{country.capital}</span></div>
+                                    </div>
+                                    <div>
+                                        <div className="mb-3 font-medium ">Top Level Domain: <span className="font-normal text-light-Input">{country.tld}</span></div>
+                                        <div className="mb-3 font-medium ">Currencies: <span className="font-normal text-light-Input">{country.currencies[Object.keys(country.currencies)[0]].name}</span></div>
+                                        <div className="mb-3 font-medium">Language: 
+                                            {Object.keys(country.languages).map( (language) => (
+                                                <span className="font-normal text-light-Input" key={language}> {country.languages[language]},</span>
+                                            ))}
+                                        </div>
+                                    </div>
                                 </section>
-                                <div></div>
+                                <div className="flex mt-8">
+                                    <div>
+                                        <h1 className="font-medium">Border Countries: </h1>
+                                    </div>
+                                    <div className="grid grid-cols-3 ml-1 gap-x-3 gap-y-3">
+                                        {country.borders.map( (border) => (
+                                            <div key={border} className="flex items-center justify-center px-4 py-2 ml-1 border rounded-md cursor-pointer border-1 border-light-Input">
+                                                <Link to={`/about/${test(border)}`}>{test(border)}</Link>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     ))}

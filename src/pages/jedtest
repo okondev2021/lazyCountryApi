@@ -1,9 +1,0 @@
-<div>
-    <div className="col-span-1 ">
-        {country.borders.map( (border) => (
-            <div key={border}>
-                <Link to={`/about/${test(border)}`}>{test(border)}</Link>
-            </div>
-        ))}
-    </div>
-</div>
