@@ -79,7 +79,7 @@ const Home = () => {
                             <i class="bi bi-caret-down-fill"></i>
                         </div>
                         <div ref={regionRef} className="relative hidden rounded-md ">
-                            <ul className="absolute top-0 left-0 z-50 w-full rounded-md bg-light-Background evenShadow">
+                            <ul className="absolute top-0 left-0 z-50 w-full rounded-md bg-light-Background dark:bg-dark-Background evenShadow">
                                 <li onClick={ (e) => selectedRegion(e)} className="py-1 pl-6 cursor-pointer " data-name="All">All</li>
                                 <li onClick={ (e) => selectedRegion(e)} className="py-1 pl-6 cursor-pointer " data-name="Africa">Africa</li>
                                 <li onClick={ (e) => selectedRegion(e)} className="py-1 pl-6 cursor-pointer " data-name="America">America</li>
