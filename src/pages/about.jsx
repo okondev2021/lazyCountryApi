@@ -1,7 +1,6 @@
 import { useParams, useNavigate, Link } from "react-router-dom"
 import { useEffect, useState } from "react"
 import Navbar from "../components/navbar"
-import leftArrow from '../assets/arrow-left.svg'
 
 const About = () => {
     // 
@@ -46,7 +45,9 @@ const About = () => {
             <section className="py-10 pt-16 px-14 mobile:px-5 mobile:py-10">
                 <header>
                     <button className="flex items-center gap-3 px-6 py-2 rounded-md evenShadow" onClick={ () => navigate(-1)}>
-                        <span><img src={leftArrow} alt="arrow" /></span>
+                        <span>
+                            <i class="bi bi-arrow-left"></i>
+                        </span>
                         <p>Back</p>
                     </button>
                 </header>

@@ -5,28 +5,30 @@ import { useState } from 'react'
 
 const Navbar = () => {
 
-    const [isDarkMode, setIsLightMode] = useState(false)
-
+    const [isLightMode, setIsLightMode] = useState(true)
+    
+    const rootElement = document.querySelector('html')
+    
     const themeChange = () => {
-        const rootElement = document.querySelector('html')
-        if(isDarkMode === false){
-            setIsLightMode(true)
+        if(isLightMode === true){
+            setIsLightMode(false)
             rootElement.classList.add('dark')
         }
         else{
-            setIsLightMode(false)
+            setIsLightMode(true)
             rootElement.classList.remove('dark')
         }
     }
 
+
     return (
         <nav className='flex items-center justify-between py-5 shadow-md px-14 mobile:px-5 mobile:py-7 bg-light-Background dark:bg-dark-Background'>
             <div className="">
-                <h1 className='text-xl font-bold mobile:text-lg'>Where in the world?</h1>
+                <h1 className='text-xl font-bold mobile:text-sm'>Where in the world?</h1>
             </div>
-            <div onClick={themeChange} className="flex items-center gap-2">
-                <img className='cursor-pointer' src={isDarkMode? sunImg: moonImg} alt="theme icon" />
-                <p className='font-bold '>{isDarkMode? "Light": "Dark"} Mode</p>
+            <div onClick={themeChange} className="flex items-center gap-2 mobile:text-sm">
+                <img className='cursor-pointer' src={rootElement.classList.contains('dark')? sunImg: moonImg} alt="theme icon" />
+                <p className='font-bold '>{rootElement.classList.contains('dark')? "Light": "Dark"} Mode</p>
             </div>
         </nav>
     )

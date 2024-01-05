@@ -1,7 +1,5 @@
 import Navbar from "../components/navbar"
 import { useEffect, useState} from "react"
-import searchImg from '../assets/search.svg'
-import arrow from '../assets/caret-down-fill.svg'
 import { useRef } from "react"
 import { Link } from "react-router-dom"
 const Home = () => {
@@ -68,17 +66,17 @@ const Home = () => {
 
                     <div className="flex items-center col-span-2 gap-4 px-4 rounded-md mobile:row-span-1 evenShadow h-14">
                         <label htmlFor="countrySearch">
-                            <img src={searchImg} alt="search icon" />
+                            <i class="bi bi-search"></i>
                         </label>
                         <form className="w-full h-full">
                             <input ref={inputRef} className="w-full h-full rounded-md outline-none bg-light-Background dark:bg-dark-Background" id="countrySearch" type="text" placeholder="Search for country..." />
                         </form>
                     </div>
                     
-                    <div className="col-span-1 col-start-6 mobile:w-[60%] mobile:col-start-1">
+                    <div className="col-span-1 col-start-6 mobile:w-[70%] mobile:col-start-1">
                         <div onClick={toggleDisplayRegions} className="flex justify-between px-4 py-4 mb-3 rounded-md cursor-pointer evenShadow">
-                            <p>Filter by Region</p>
-                            <img src={arrow} alt="" />
+                            <p className=" mobile:text-sm">Filter by Region</p>
+                            <i class="bi bi-caret-down-fill"></i>
                         </div>
                         <div ref={regionRef} className="relative hidden rounded-md ">
                             <ul className="absolute top-0 left-0 z-50 w-full rounded-md bg-light-Background evenShadow">
