@@ -97,7 +97,7 @@ const Home = () => {
                 <div className="relative grid grid-cols-4 mt-10 gap-14 mobile:grid-cols-1">
                     {allCountries?.map( (country) => (
                         <Link to={`/about/${country.name.official}`}>
-                            <div key={country.capital} className="rounded-md evenShadow card min-h-80 mobile:w-[70%] mx-auto ">  
+                            <div key={country.capital} className="rounded-md evenShadow card min-h-80 mobile:w-[85%] mx-auto ">  
                                 <div className="w-full h-40 rounded-md countryFlag">
                                     <img src={country.flags.png} className="w-full h-full rounded-t-md" alt="" />
                                 </div>

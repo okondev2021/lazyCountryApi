@@ -60,7 +60,7 @@ const About = () => {
                                 <div>
                                     <h1 className="text-3xl font-bold">{country.name.common}</h1>
                                 </div>
-                                <section className="grid grid-cols-2 mt-8 mobile:grid-cols-1 mobile:grid-rows-2 mobile:gap-8 mobile:items-start">
+                                <section className="grid grid-cols-2 mt-8 mobile:grid-cols-1 mobile:grid-rows-1 mobile:gap-8 mobile:items-start">
                                     <div>
                                         <div className="mb-3 font-medium ">Native Name: <span className="font-normal text-light-Input">{country.name.nativeName[Object.keys(country.name.nativeName)[0]]?.official  }</span></div>
                                         <div className="mb-3 font-medium ">Population: <span className="font-normal text-light-Input">{country.population}</span></div>
@@ -78,7 +78,7 @@ const About = () => {
                                         </div>
                                     </div>
                                 </section>
-                                <div className="flex mt-8 mobile:mt-0 mobile:flex-col mobile:gap-2 ">
+                                <div className="flex mt-8 mobile:flex-col mobile:gap-2 ">
                                     <div>
                                         <h1 className="font-medium">Border Countries: </h1>
                                     </div>
