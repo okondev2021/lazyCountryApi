@@ -63,10 +63,10 @@ const Home = () => {
             <>
                 <Navbar />
             </>
-            <section className="py-10 pt-16 px-14">
-                <header className="grid grid-cols-6">
+            <section className="py-10 pt-16 px-14 mobile:px-5 mobile:py-10">
+                <header className="grid flex-col grid-cols-6 mobile:grid-cols-1 mobile:grid-rows-2 mobile:gap-6">
 
-                    <div className="flex items-center col-span-2 gap-4 px-4 rounded-md evenShadow h-14">
+                    <div className="flex items-center col-span-2 gap-4 px-4 rounded-md mobile:row-span-1 evenShadow h-14">
                         <label htmlFor="countrySearch">
                             <img src={searchImg} alt="search icon" />
                         </label>
@@ -75,7 +75,7 @@ const Home = () => {
                         </form>
                     </div>
                     
-                    <div className="col-span-1 col-start-6 ">
+                    <div className="col-span-1 col-start-6 mobile:w-[60%] mobile:col-start-1">
                         <div onClick={toggleDisplayRegions} className="flex justify-between px-4 py-4 mb-3 rounded-md cursor-pointer evenShadow">
                             <p>Filter by Region</p>
                             <img src={arrow} alt="" />
@@ -94,11 +94,11 @@ const Home = () => {
                     
                 </header>
                 {/*  */}
-                <div className="relative grid grid-cols-4 mt-10 gap-14">
+                <div className="relative grid grid-cols-4 mt-10 gap-14 mobile:grid-cols-1">
                     {allCountries?.map( (country) => (
                         <Link to={`/about/${country.name.official}`}>
-                            <div key={country.capital} className="rounded-md evenShadow card h-80">  
-                                <div className="w-full rounded-md countryFlag h-36">
+                            <div key={country.capital} className="rounded-md evenShadow card h-80 mobile:w-[70%] mx-auto">  
+                                <div className="w-full h-40 rounded-md countryFlag">
                                     <img src={country.flags.png} className="w-full h-full rounded-t-md" alt="" />
                                 </div>
                                 <div className="countryInfo w-[85%] mx-auto pt-4 pb-10">
