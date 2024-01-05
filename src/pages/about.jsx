@@ -60,7 +60,7 @@ const About = () => {
                                 <div>
                                     <h1 className="text-3xl font-bold">{country.name.common}</h1>
                                 </div>
-                                <section className="grid grid-cols-2 mt-8 mobile:grid-cols-1 mobile:grid-rows-2 mobile:gap-8 ">
+                                <section className="grid grid-cols-2 mt-8 mobile:grid-cols-1 mobile:grid-rows-2 mobile:gap-8 mobile:items-start">
                                     <div>
                                         <div className="mb-3 font-medium ">Native Name: <span className="font-normal text-light-Input">{country.name.nativeName[Object.keys(country.name.nativeName)[0]]?.official  }</span></div>
                                         <div className="mb-3 font-medium ">Population: <span className="font-normal text-light-Input">{country.population}</span></div>
@@ -78,13 +78,13 @@ const About = () => {
                                         </div>
                                     </div>
                                 </section>
-                                <div className="flex mt-8">
+                                <div className="flex mt-8 mobile:mt-0 mobile:flex-col mobile:gap-2 ">
                                     <div>
                                         <h1 className="font-medium">Border Countries: </h1>
                                     </div>
-                                    <div className="grid grid-cols-4 ml-1 gap-x-3 gap-y-3">
+                                    <div className="flex flex-wrap ml-1 mobile:ml-0 gap-x-3 gap-y-3">
                                         {country.borders?.map( (border) => (
-                                            <div key={border} className="flex items-center justify-center px-2 py-2 ml-1 text-xs border-2 rounded-md cursor-pointer border-light-Input">
+                                            <div key={border} className="flex items-center justify-center px-2 py-2 ml-1 text-xs border-2 rounded-md cursor-pointer border-light-Input evenShadow dark:bg-dark-Elements dark:border-none">
                                                 <Link to={`/about/${test(border)}`}>{test(border)}</Link>
                                             </div>
                                         ))}
