@@ -75,7 +75,7 @@ const Home = () => {
                     
                     <div className="col-span-1 col-start-6 mobile:w-[70%] mobile:col-start-1">
                         <div onClick={toggleDisplayRegions} className="flex justify-between px-4 py-4 mb-3 rounded-md cursor-pointer evenShadow">
-                            <p className=" mobile:text-sm">Filter by Region</p>
+                            <p className=" mobile:text-sm md:text-sm">Filter by Region</p>
                             <i class="bi bi-caret-down-fill"></i>
                         </div>
                         <div ref={regionRef} className="relative hidden rounded-md ">
@@ -92,7 +92,7 @@ const Home = () => {
                     
                 </header>
                 {/*  */}
-                <div className="relative grid grid-cols-4 mt-10 gap-14 mobile:grid-cols-1">
+                <div className="relative grid grid-cols-4 mt-10 gap-14 mobile:grid-cols-1 md:grid-cols-3 tab:grid-cols-2">
                     {allCountries?.map( (country) => (
                         <Link to={`/about/${country.name.official}`}>
                             <div key={country.capital} className="rounded-md evenShadow card min-h-80 mobile:w-[85%] mx-auto ">  

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import Navbar from "../components/navbar"
 
 const About = () => {
+    
     // 
     const {slug} = useParams()
     const [countryDetails, setCountryDetail] = useState(null)
@@ -14,10 +15,10 @@ const About = () => {
             alert('Internet Connection')
         })
     },[slug])
-
-    console.log(slug, countryDetails, `https://restcountries.com/v3.1/name/${slug}?fullText=true?fields=name,currencies,languages,tld,capital,population,region,subregion,flags,borders,altSpellings`)
+    
     // 
     const navigate = useNavigate()
+    
     // 
     const [allCountries, setAllCountries] = useState(null)
     useEffect( () => {
@@ -27,6 +28,7 @@ const About = () => {
             setAllCountries(data)
         })
     }, [])
+    
     // 
     const test = (val) => {
         const allCountriesInfo = allCountries
