@@ -8,13 +8,15 @@ const About = () => {
     const {slug} = useParams()
     const [countryDetails, setCountryDetail] = useState(null)
     useEffect( () => {
-        fetch(`https://restcountries.com/v3.1/name/${slug}?fullText=true?fields=name,currencies,languages,tld,capital,population,region,subregion,flags,borders,altSpellings`)
+        fetch(`https://restcountries.com/v3.1/name/${slug}?fullText=true`)
         .then( response => response.json())
         .then(data => {setCountryDetail(data)})
         .catch( (err) => {
             alert('Internet Connection')
         })
     },[slug])
+
+    console.log(slug, countryDetails, `https://restcountries.com/v3.1/name/${slug}?fullText=true?fields=name,currencies,languages,tld,capital,population,region,subregion,flags,borders,altSpellings`)
     // 
     const navigate = useNavigate()
     // 
@@ -41,7 +43,7 @@ const About = () => {
             <section>
                 <Navbar />
             </section>
-            <section className="py-10 pt-16 px-14">
+            <section className="py-10 pt-16 px-14 mobile:px-5 mobile:py-10">
                 <header>
                     <button className="flex items-center gap-3 px-6 py-2 rounded-md evenShadow" onClick={ () => navigate(-1)}>
                         <span><img src={leftArrow} alt="arrow" /></span>
@@ -50,15 +52,15 @@ const About = () => {
                 </header>
                 <main className="mt-10 ">
                     {countryDetails?.map( (country) => (
-                        <div key={country.name.common} className="flex justify-between gap-20">
-                            <div className=" w-[50%]  items-center justify-center">
-                                <img className="w-[90%] h-[90%] mx-auto" src={country.flags.png} alt="" />
+                        <div key={country.name.common} className="flex justify-between gap-20 mobile:flex-col">
+                            <div className=" w-[50%] mobile:w-[100%]  items-center justify-center">
+                                <img className="w-[90%] mobile:w-[100%] h-[90%] mx-auto" src={country.flags.png} alt="" />
                             </div>
-                            <div className=" w-[50%]">
+                            <div className=" w-[50%] mobile:w-[100%]">
                                 <div>
                                     <h1 className="text-3xl font-bold">{country.name.common}</h1>
                                 </div>
-                                <section className="grid grid-cols-2 mt-8 ">
+                                <section className="grid grid-cols-2 mt-8 mobile:grid-cols-1 mobile:grid-rows-2 mobile:gap-8 ">
                                     <div>
                                         <div className="mb-3 font-medium ">Native Name: <span className="font-normal text-light-Input">{country.name.nativeName[Object.keys(country.name.nativeName)[0]]?.official  }</span></div>
                                         <div className="mb-3 font-medium ">Population: <span className="font-normal text-light-Input">{country.population}</span></div>
@@ -70,7 +72,7 @@ const About = () => {
                                         <div className="mb-3 font-medium ">Top Level Domain: <span className="font-normal text-light-Input">{country.tld}</span></div>
                                         <div className="mb-3 font-medium ">Currencies: <span className="font-normal text-light-Input">{country.currencies[Object.keys(country.currencies)[0]].name}</span></div>
                                         <div className="mb-3 font-medium">Language: 
-                                            {Object.keys(country.languages).map( (language) => (
+                                            {Object.keys(country.languages)?.map( (language) => (
                                                 <span className="font-normal text-light-Input" key={language}> {country.languages[language]},</span>
                                             ))}
                                         </div>
@@ -81,7 +83,7 @@ const About = () => {
                                         <h1 className="font-medium">Border Countries: </h1>
                                     </div>
                                     <div className="grid grid-cols-4 ml-1 gap-x-3 gap-y-3">
-                                        {country.borders.map( (border) => (
+                                        {country.borders?.map( (border) => (
                                             <div key={border} className="flex items-center justify-center px-2 py-2 ml-1 text-xs border-2 rounded-md cursor-pointer border-light-Input">
                                                 <Link to={`/about/${test(border)}`}>{test(border)}</Link>
                                             </div>
