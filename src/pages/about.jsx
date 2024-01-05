@@ -37,7 +37,7 @@ const About = () => {
 
 
     return (
-        <div className="min-h-screen bg-light-Background dark:bg-dark-Background text-light-Text dark:text-neutral">
+        <div className="min-h-screen bg-light-Background dark:bg-dark-Background text-light-Text dark:text-neutral font-body">
             <section>
                 <Navbar />
             </section>

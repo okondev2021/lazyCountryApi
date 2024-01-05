@@ -14,6 +14,9 @@ module.exports = {
       'mobile': {'max': '430px'},
       // => @media (max-width: 430px) { ... }
     },
+    fontFamily:{
+      body: ['Nunito Sans']
+    },
     extend: {
       colors: {
        "light": {
