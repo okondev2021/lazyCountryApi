@@ -11,6 +11,9 @@ const About = () => {
         fetch(`https://restcountries.com/v3.1/name/${slug}?fullText=true?fields=name,currencies,languages,tld,capital,population,region,subregion,flags,borders,altSpellings`)
         .then( response => response.json())
         .then(data => {setCountryDetail(data)})
+        .catch( (err) => {
+            alert('Internet Connection')
+        })
     },[slug])
     // 
     const navigate = useNavigate()
@@ -48,8 +51,8 @@ const About = () => {
                 <main className="mt-10 ">
                     {countryDetails?.map( (country) => (
                         <div key={country.name.common} className="flex justify-between gap-20">
-                            <div className=" w-[50%]">
-                                <img className="w-[90%] h-[70%] mx-auto" src={country.flags.png} alt="" />
+                            <div className=" w-[50%]  items-center justify-center">
+                                <img className="w-[90%] h-[90%] mx-auto" src={country.flags.png} alt="" />
                             </div>
                             <div className=" w-[50%]">
                                 <div>

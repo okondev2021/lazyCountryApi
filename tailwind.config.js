@@ -5,6 +5,15 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
+    screens: {
+      'big': {'max': '1300px'},
+      // => @media (max-width: 1300px) { ... }
+
+      'md': {'max': '1030px'},
+      // => @media (max-width: 1030px) { ... }
+      'mobile': {'max': '430px'},
+      // => @media (max-width: 430px) { ... }
+    },
     extend: {
       colors: {
        "light": {
